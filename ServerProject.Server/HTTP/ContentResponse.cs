@@ -1,7 +1,7 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
-using System.Reflection.PortableExecutable;
 using System.Text;
 using WebServer.Server.Common;
 using WebServer.Server.HTTP_Request;
@@ -10,12 +10,14 @@ namespace WebServer.Server.HTTP
 {
     public class ContentResponse : Response
     {
-        public ContentResponse(string content, string contentType)
+        public ContentResponse(string content, string contentType,
+            Action<Request, Response> preRenderAction = null)
             : base(StatusCode.OK)
         {
             Guard.AgainstNull(content);
             Guard.AgainstNull(contentType);
 
+            this.PreRenderAction = preRenderAction;
             this.Headers.Add(Header.ContentType, contentType);
             this.Body = content;
         }
