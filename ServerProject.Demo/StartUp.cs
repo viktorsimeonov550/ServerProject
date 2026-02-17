@@ -1,0 +1,23 @@
+﻿using System.Net.Sockets;
+using System.Net;
+using System.Text;
+using ServerProject.Server;
+using ServerProject.Server.Responses;
+
+namespace WebServer.demo
+{
+    public class StartUp
+    {
+        public static void Main()
+        {
+            var server = new HttpServer(routes =>
+            {
+                routes
+                .MapGet("/", new TextResponse("Hello from the server!"))
+                .MapGet("/HTML", new HtmlResponse("<h1>HTML response</h1>"))
+                .MapGet("/Redirect", new RedirectResponse("https://softuni.org/"));
+            });
+            server.Start();
+        }
+    }
+}
