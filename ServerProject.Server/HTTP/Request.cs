@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,8 +13,6 @@ namespace WebServer.Server.HTTP_Request
         public string Url { get; private set; }
         public HeaderCollection Headers { get; private set; }
         public string Body { get; private set; }
-
-        // Ensure FromData is never null by default to avoid NREs when consumers iterate it.
         public IReadOnlyDictionary<string, string> FromData { get; private set; } = new Dictionary<string, string>();
 
         public static Request Parse(string request)
